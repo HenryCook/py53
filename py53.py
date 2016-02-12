@@ -17,7 +17,7 @@ def parse_args():
     return args
 
 
-def host_records():
+def host_zones():
     response = client.list_hosted_zones()
     print response
 
@@ -26,7 +26,7 @@ def main():
     args = parse_args()
 
     if args.list_zones:
-        host_records()
+        host_zones()
     else:
         sys.exit()
     pass
