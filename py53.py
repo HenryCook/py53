@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import argparse
-import boto3
+
 import sys
+
+import boto3
 
 
 client = boto3.client('route53')
@@ -10,20 +12,21 @@ client = boto3.client('route53')
 
 def parse_args():
     parser = argparse.ArgumentParser(description='route53 management')
-    parser.add_argument('-z', '--list_zones', action='store_true', help='Lists hosted zones')
+    parser.add_argument('-l', '--list_zones', action='store_true', help='Lists hosted zones')
     args = parser.parse_args()
     return args
 
 
-def host_records(args, list_zones):
-    return client.list_hosted_zones_by_name(args.list_zones)
+def host_records():
+    response = client.list_hosted_zones()
+    print response
 
 
 def main():
     args = parse_args()
 
-    if args.list_zones is None:
-        host_records(args.list_zones)
+    if args.list_zones:
+        host_records()
     else:
         sys.exit()
     pass
